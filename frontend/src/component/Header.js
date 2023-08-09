@@ -71,7 +71,7 @@ const Header = () => {
 
                 {(window.localStorage.getItem("token")) ?(
                   <p
-                    className="cursor-pointer text-white px-2 bg-red-500"
+                    // className="cursor-pointer text-white px-2 bg-red-500"
                     onClick={handleLogout}
                   >
                     Logout ({userData.firstName}){" "}

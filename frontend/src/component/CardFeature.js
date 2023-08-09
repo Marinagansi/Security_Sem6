@@ -2,13 +2,27 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link ,useNavigate} from "react-router-dom";
 import { addCartItem,increaseQty } from "../redux/productSlide";
+import cartServices from "../services/cartServices";
+import '../style/Home.css'
 
 const CardFeature = ({ image, name, price, category, loading, id }) => {
   const dispatch = useDispatch()
+  
 
-  const handleAddCartProduct = (e) => {
+  const quantity = 1;
+  const prices=200;
 
-    
+  const handleAddCartProduct = ({id,quantity,prices}) => {
+    console.log({id,quantity,prices});
+    cartServices.addtocart({id,quantity,prices})
+        .then((res) => {
+          alert("Product Added to Cart");
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
     dispatch(addCartItem({
       _id : id,
       name : name,
@@ -27,24 +41,25 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
         navigate("/signup");
       
     }
-    const Button=()=>{
-      if (window.localStorage.getItem("token")) {
-        return (
-          <button
-            className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 w-full"
-            onClick={handleAddCartProduct}
-          >
-            Add Cart
-          </button>
-        );
-      }
-      else {
-        return (
-          <button className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 w-full"onClick={logout}>Add Cart</button>
-        );
-      }
+    // const Button=()=>{
+    //   if (window.localStorage.getItem("token")) {
+    //     return (
+    //       <button
+    //         className="btn1"
+    //         onClick={handleAddCartProduct(id, quantity,price)}
+    //       >
+    //         Add Cart
+    //       </button>
+    //     );
+    //   }
+    //   else {
+    //     return (
+    //       <button className="btn1"onClick={logout}
+    //     >Add Cart</button>
+    //     );
+    //   }
       
-    }
+    // }
     
   return (
     <div className="w-full min-w-[200px] max-w-[200px] bg-white hover:shadow-lg drop-shadow-lg py-5 px-4 cursor-pointer flex flex-col ">
@@ -66,7 +81,12 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
               <span>{price}</span>
             </p>
           </Link>
-          <Button/>
+          <button
+            className="btn1"
+            onClick={()=>handleAddCartProduct({id, quantity,prices})}
+          >
+            Add Cart
+          </button>
           {/* <button
             className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 w-full"
             onClick={handleAddCartProduct}

@@ -7,8 +7,12 @@ const mongoose=require('mongoose')
 const path = require("path");
 const users_routes=require('./routes/user-route')
 const product_routes=require('./routes/product_route')
+const cart_routes=require('./routes/cart_routes')
+const order_routes=require('./routes/order_routes')
+const auditLogMiddleware = require('./auditLogMiddleware');
 port =3000
 
+app.use(auditLogMiddleware);
 mongoose.connect('mongodb://127.0.0.1:27017/jewel')
     .then(() => {
         console.log('connected to mongodb server')
@@ -34,6 +38,8 @@ app.use(
 //3. Router level middleware
 app.use('/users',users_routes)
 app.use('/product',product_routes)
+app.use('/cart',cart_routes)
+app.use('/order',order_routes)
 
 
 //4.error handle middleware

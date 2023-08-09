@@ -4,6 +4,7 @@ const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
 const router =express.Router()
 const User=require('../models/user')
+const mailService=require('../controller/mailService')
 
 
 
@@ -51,10 +52,14 @@ const register=((req, res, next)=>{
 
 
 const login=(req,res, next)=>{
-    User.findOne({username:req.body.username})
+    const {email, code}=req.body;
+    mailService.sendVerificationCode(email, code)
+    
+
+    User.findOne({email:req.body.email})
     .then(user=>{
         if(user == null){
-            let err=new Error(`User ${req.body.username} has not register`)
+            let err=new Error(`User ${req.body.email} has not register`)
             res.status(404)
             return next(err)
         }
@@ -68,16 +73,17 @@ const login=(req,res, next)=>{
                 }
                 let data ={
                     userId: user._id, 
-                    username: user.username,
+                    email: user.email,
                     role:user.role
                 }
                 jwt.sign(data, process.env.SECRET,
-                     {'expiresIn':'1d'},(err,token)=>{
+                     {'expiresIn':'3d'},(err,token)=>{
                         if(err) return next(err)
                         res.status(200).json({
                         success:true,
                         message:'login successful',
-                        token:token    
+                        token:token , 
+                        id:user._id,  
                                    })
                      })
                 

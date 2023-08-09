@@ -20,7 +20,9 @@ import toast, { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { setDataProduct } from "./redux/productSlide";
 import { useDispatch, useSelector } from "react-redux";
-
+import Users from './page/Admin/User';
+import Forms from './page/Admin/jewel/form';
+import Addproduct from './page/Admin/jewel/index';
 function App() {
 
   const [product, setProduct] = useState([])
@@ -60,6 +62,14 @@ function App() {
       <Route path="cart" element={<Cart />} />
       <Route path="success" element={<Success/>}/>
       <Route path="cancel" element={<Cancel/>}/>
+      <Route path="logins" element={<Users/>} />
+      <Route path="users" element={<Users/>} />
+        <Route exact path="addproduct" element={<Addproduct/>} />
+        <Route exact path="forms" element={<Forms/>} />
+
+              {/* admin page */}
+       
+       
   
     </Routes>
       {/* <Toaster />

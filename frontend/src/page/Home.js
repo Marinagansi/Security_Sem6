@@ -6,6 +6,9 @@ import { GrPrevious, GrNext } from "react-icons/gr";
 import FilterProduct from "../component/FilterProduct";
 import AllProduct from "../component/AllProduct";
 import productServices from "../services/productServices";
+import "../style/Home.css";
+
+import Footer from "../component/Footer/footer";
 
 const Home = ({ product, setProducts }) => {
   // const [product, setProducts] = useState([]);
@@ -46,26 +49,31 @@ const Home = ({ product, setProducts }) => {
   };
 
   return (
-    <div className="p-2 md:p-4">
+    <div className="p-2 md:p-4 homs">
       <div className="md:flex gap-4 py-2">
         <div className="md:w-1/2">
           <div className="flex gap-3 bg-slate-300 w-36 px-2 items-center rounded-full">
-            <p className="text-sm font-medium text-slate-900"> Delivery</p>
+            {/* <p className="text-sm font-medium text-slate-900"> Delivery</p>
             <img
               src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png"
               className="h-7"
-            />
+            /> */}
           </div>
-          <h2 className="text-4xl md:text-7xl font-bold py-3">
-            The Fasted Delivery in{" "}
-            <span className="text-yellow-600 text-">Your Home</span>
+          <h2 className="heading">
+           
+            <span className="subHeading">Unleash Your Elegance: Adorn with Timeless Brilliance!</span>
+            Wildest Range of Diamond Jewellery{" "}
           </h2>
           <p className="py-3 text-base ">
-            Book a fun and interactive appointment with a diamond expert and get
-            up-close views of diamond and jewelery options from the comfort of
-            your own home.
+            "Discover Your Sparkle: Embrace the Brilliance of Timeless Elegance
+            at Our Exquisite Jewelry Emporium! From Dazzling Diamonds to
+            Mesmerizing Gemstones, Find Your Signature Style and Illuminate
+            Every Moment with Grace and Glamour. Unveil the Beauty of Artisan
+            Craftsmanship and Unforgettable Designs that Radiate a Captivating
+            Aura. Your Journey to Timeless Glamour Starts Here – Unleash Your
+            Inner Brilliance at Our Jewelry Shop!"
           </p>
-          <button className="font-bold bg-yellow-500 text-slate-200 px-4 py-2 rounded-md">
+          <button className="font-bold bg-brown-500 text-slate-200 px-4 py-2 rounded-md ordersbtn">
             Order Now
           </button>
         </div>
@@ -133,6 +141,7 @@ const Home = ({ product, setProducts }) => {
       </div>
 
       <AllProduct heading={"Your Product"} productData={types} />
+      <Footer />
     </div>
   );
 };

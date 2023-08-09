@@ -33,7 +33,20 @@ function Signup() {
   const Navigate=useNavigate()
  
 
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
+  useEffect(() => {
+    if (password !== cpassword) {
+      setPasswordMatch(false);
+    } else {
+      setPasswordMatch(true);
+    }
+  }, [password, cpassword]);
+
+  const handleConfirmPasswordChange = (e) => {
+    setCPassword(e.target.value);
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -52,6 +65,10 @@ function Signup() {
     }
     if (!username) {
       setUsernameError('Username is required');
+      return;
+    }
+    if (!passwordMatch) {
+      setMessage('Password and confirm password do not match');
       return;
     }
     const formdata=new FormData();
@@ -158,8 +175,8 @@ function Signup() {
            <label >UserName</label>
           <input
             type={"text"}
-            id="lastName"
-            name="lastName"
+            id="userName"
+            name="userName"
             className="mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded focus-within:outline-blue-300"
             value={username}
             onChange={(e)=>{
@@ -214,6 +231,8 @@ function Signup() {
               className=" w-full bg-slate-200 border-none outline-none "
               // value={data.confirmPassword}
               // onChange={handleOnChange}
+              value={cpassword}
+            onChange={handleConfirmPasswordChange}
             />
             <span
               className="flex text-xl cursor-pointer"
@@ -222,7 +241,10 @@ function Signup() {
               {showConfirmPassword ? <BiShow /> : <BiHide />}
             </span>
           </div>
-          {messages}
+          {!passwordMatch && (
+          <p className="text-red-500 text-sm">Password and confirm password do not match</p>
+        )}
+          {/* {messages} */}
 
           <button className="w-full max-w-[150px] m-auto  bg-red-500 hover:bg-red-600 cursor-pointer  text-white text-xl font-medium text-center py-1 rounded-full mt-4" onClick={handleRegister}>
             Sign up

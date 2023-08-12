@@ -4,19 +4,20 @@ import { Link ,useNavigate} from "react-router-dom";
 import { addCartItem,increaseQty } from "../redux/productSlide";
 import cartServices from "../services/cartServices";
 import '../style/Home.css'
+import { message } from "antd";
 
 const CardFeature = ({ image, name, price, category, loading, id }) => {
   const dispatch = useDispatch()
   
 
   const quantity = 1;
-  const prices=200;
+  const prices=3345660;
 
   const handleAddCartProduct = ({id,quantity,prices}) => {
     console.log({id,quantity,prices});
     cartServices.addtocart({id,quantity,prices})
         .then((res) => {
-          alert("Product Added to Cart");
+          message.success("Product Added to Cart");
           console.log(res);
         })
         .catch((err) => {
@@ -26,7 +27,7 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
     dispatch(addCartItem({
       _id : id,
       name : name,
-      price : price,
+      price : prices,
       category : category,
       image : image
     }))
@@ -81,18 +82,20 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
               <span>{price}</span>
             </p>
           </Link>
-          <button
-            className="btn1"
-            onClick={()=>handleAddCartProduct({id, quantity,prices})}
-          >
+         
+          
+          {window.localStorage.getItem("token") ? (
+            <button
+              className="btn1"
+              onClick={() => handleAddCartProduct({ id, quantity, prices })}
+            >
+              Add Cart
+            </button>
+          ) : (
+            <button className="btn1" onClick={logout}>
             Add Cart
-          </button>
-          {/* <button
-            className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 w-full"
-            onClick={handleAddCartProduct}
-          >
-            Add Cart
-          </button> */}
+            </button>
+          )}
         </>
       ) : (
         <div className="min-h-[150px] flex justify-center items-center">

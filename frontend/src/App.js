@@ -22,7 +22,8 @@ import { setDataProduct } from "./redux/productSlide";
 import { useDispatch, useSelector } from "react-redux";
 import Users from './page/Admin/User';
 import Forms from './page/Admin/jewel/form';
-import Addproduct from './page/Admin/jewel/index';
+import Product from './page/Admin/jewel/index';
+
 function App() {
 
   const [product, setProduct] = useState([])
@@ -46,7 +47,13 @@ function App() {
 
   return (
     <>
-    <Header />
+   <Routes>
+   <Route exact path="forms" element={<Forms/>} />
+   <Route path="users" element={<Users/>} />
+    
+    <Route exact path="product" element={<Product/>} />
+   </Routes>
+        <Header />
     <main className="pt-16 bg-slate-100 min-h-[calc(100vh)]">
     <Routes>
     
@@ -63,10 +70,7 @@ function App() {
       <Route path="success" element={<Success/>}/>
       <Route path="cancel" element={<Cancel/>}/>
       <Route path="logins" element={<Users/>} />
-      <Route path="users" element={<Users/>} />
-        <Route exact path="addproduct" element={<Addproduct/>} />
-        <Route exact path="forms" element={<Forms/>} />
-
+     
               {/* admin page */}
        
        

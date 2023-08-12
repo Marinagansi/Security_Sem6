@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import SideBarItem from './sidebar-item';
 
 import './styles.css';
-// import logo from '../../../assets/images/educatelogo.png';
+import logo from '../../../assest/logo.png';
 import LogoutIcon from '../../../assest/icons/logout.svg';
 
 function SideBar ({ menu }) {
@@ -33,7 +33,7 @@ function SideBar ({ menu }) {
             <div className='sidebar-container'>
                 <div className='sidebar-logo-container' >
                     <img 
-                        // src={}
+                        src={logo}
                         alt="logo"  style={{"marginleft":"18px"}}/>
                         {/* <h1 >EDUCATE</h1>
                         <h2>welcome</h2> */}

@@ -25,6 +25,7 @@ const register=((req, res, next)=>{
                 lname:req.body.lname,
                 username:req.body.username,
                 email:req.body.email,
+                role:req.body.role,
                 password: hash
         
            })
@@ -42,6 +43,7 @@ const register=((req, res, next)=>{
                     'status0':'succesful',
                     success:true,
                     message:"Student registered succesfully",
+                   
                     data:user
                 })
             }).catch(next);
@@ -83,9 +85,11 @@ const login=(req,res, next)=>{
                         success:true,
                         message:'login successful',
                         token:token , 
+                        role:user.role,
                         id:user._id,  
                                    })
                      })
+                     
                 
              })
         
@@ -114,6 +118,33 @@ const getAlltUser=(req, res) => {
         ); // or go to model class and set select:false
 };
 
+const updateUser=(req, res,next) => {
+    if (req.body.password) {
+        req.body.password = bcrypt.hash(req.body.password, 10, (err, hash) => {
+            if (err) return next(err)
+            req.body.password = hash
+            User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
+                .then((user) => {
+                    res.status(200).json({
+                        success:true,
+                        message:'User updated successfully',
+                        data:user,
+                    })
+                }).catch(next)
+        }
+        )
+    } else {
+        User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
+            .then((user) => {
+                res.status(200).json({
+                    success:true,
+                    message:'User updated successfully',
+                    data:user,
+                })
+            }).catch(next)
+    }
+
+};
 
 
 
@@ -121,5 +152,6 @@ module.exports={
     register,
     login,
     getAlltUser,
+    updateUser
 
 }

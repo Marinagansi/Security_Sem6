@@ -59,7 +59,7 @@ const User=()=>{
         <SideBar menu={sidebar_menu} />
         <div className='dashboard-content'>
         <DashboardHeader
-                btnText="n" />
+                btnText="user" />
                 <h5 style={{"fontSize":"1rem","marginLeft":"30px"}}>Users details</h5>
 
             <div className='dashboard-content-container'>
@@ -82,7 +82,7 @@ const User=()=>{
                       
                        
                         <th>Full Name</th>
-                        {/* <th>Username</th> */}
+                        <th>Username</th>
                         {/* <th>Edit</th> */}
                     </thead>
 
@@ -100,6 +100,7 @@ const User=()=>{
                                                 className='dashboard-content-avatar'
                                                 alt={order.fname + ' ' +order.lname} /> */}
                                             <span>{order.name}</span>
+                                            <span>{order.fname + ' ' +order.lname}</span>
                                         </div>
                                     </td>
                                     <td><span>{order.username}</span></td>

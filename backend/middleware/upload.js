@@ -15,7 +15,7 @@ const imageFileFilter=(req, file, cb)=>{
     if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)){
         return cb(new Error('File formar not spported'),false)
     }
-    cb(null,true)
+    cb(null,true) 
 }
 
 const upload=multer({

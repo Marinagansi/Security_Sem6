@@ -12,11 +12,11 @@
     cursor: pointer;
     color: #FFFFFF;
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight: 500;
     border-radius: 8px;
     text-transform: uppercase;
-    border: 1px solid #f6cb3f ;
-    background-color: #f6cb3f  ;
+    border: 1px solid rgb(47, 27, 2) ;
+    background-color: rgb(47, 27, 2) ;
     width:13%;
 }
 .dashbord-header-btn:hover {

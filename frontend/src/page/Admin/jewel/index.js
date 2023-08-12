@@ -9,7 +9,7 @@ import sidebar_menu from '../../../component/Admin/constants/sidebar-menu';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
  
-function Unis () {
+const Product= ()=> {
     const [search, setSearch] = useState('');
     const [product, setproduct] = useState([]);
     const [page, setPage] = useState(1);
@@ -62,7 +62,7 @@ function Unis () {
            
               <Link to="/forms"> <DashboardHeader
                 btnText="Add new" /></Link>
-                <h5 style={{"fontSize":"1rem","marginLeft":"30px"}}>University details</h5>
+                <h5 style={{"fontSize":"1rem","marginLeft":"30px"}}>Product details</h5>
 
             <div className='dashboard-content-container'>
                 <div className='dashboard-content-header'>
@@ -81,7 +81,7 @@ function Unis () {
                     <thead>
                         <th>ID</th>
                         <th>name</th>
-                        <th>location</th>
+                        <th>price</th>
                         <th>Image</th>
                        
                     </thead>
@@ -95,7 +95,7 @@ function Unis () {
                                     <td>
                                         
                                            
-                                            <span>{order.location}</span>
+                                            <span>{order.price}</span>
                                         
                                     </td>
                                     <td>
@@ -136,4 +136,4 @@ function Unis () {
     )
 }
 
-export default Unis;
+export default Product;

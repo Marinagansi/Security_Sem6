@@ -23,7 +23,7 @@ import Success from "./page/Success";
 import Cancel from "./page/Cancel";
 import Users from './page/Admin/User';
 import Forms from './page/Admin/jewel/form';
-import Addproduct from './page/Admin/jewel/index';
+import Product from './page/Admin/jewel/index';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,8 +40,9 @@ const router = createBrowserRouter(
       <Route path="success" element={<Success/>}/>
       <Route path="cancel" element={<Cancel/>}/>
       <Route path="users" element={<Users/>} />
-        <Route exact path="addproduct" element={<Addproduct/>} />
+    
         <Route exact path="forms" element={<Forms/>} />
+        <Route exact path="product" element={<Product/>} />
     </Route>
   )
 );

@@ -40,8 +40,8 @@ const Menu = ({prod}) => {
             <span>{prod.price}</span>
           </p>
           <div className="flex gap-3">
-          <button onClick={handleBuy} className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 min-w-[100px]">Buy</button>
-          <button onClick={handleAddCartProduct} className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 min-w-[100px]">Add Cart</button>
+          <button onClick={handleBuy} className="bg-brown-500 py-1 mt-2 rounded hover:bg-brown-600 min-w-[100px]" style={{"backgroundColor":"rgb(40, 23, 2)","color":"white"}}>Buy</button>
+          <button onClick={handleAddCartProduct} className="bg-brown-500 py-1 mt-2 rounded hover:bg-brown-600 min-w-[100px]"  style={{"backgroundColor":"rgb(47, 27, 2)","color":"white"}}>Add Cart</button>
           </div>
           <div>
             <p className="text-slate-600 font-medium">Description : </p>

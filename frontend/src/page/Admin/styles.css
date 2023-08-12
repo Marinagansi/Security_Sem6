@@ -53,7 +53,7 @@
     border: 1px solid gray;
 }
 .dashboard-content-search:focus {
-    outline: #e9d38d auto 1px;
+    outline: rgb(47, 27, 2) auto 1px;
 }
 .dashboard-content-input {
     font-style: inherit;
@@ -83,7 +83,7 @@ th {
     padding: 12px 24px;
     background: transparent;
     box-shadow: none;
-    color:#e9d38d ;
+    color:rgb(47, 27, 2) ;
     font-size: 0.75rem;
     font-weight: 700;
     line-height: 1.25;
@@ -157,7 +157,7 @@ td span {
     margin: 0.2rem;
     border-radius: 5px;
     color: #FFFFFF;
-    background-color:#e9d38d ;
+    background-color:rgb(47, 27, 2) ;
     cursor: pointer;
 }
 .empty-table {

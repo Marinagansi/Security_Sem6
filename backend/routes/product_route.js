@@ -11,7 +11,7 @@ router.route('/')
    
     let uni={
         ...req.body,
-        image:req.file.filename,
+        image:req.file,
         
     }
     const file=req.file;

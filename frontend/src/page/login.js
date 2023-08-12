@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import loginSignupImage from "../assest/login-animation.gif";
 import { BiShow, BiHide } from "react-icons/bi";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ import {message} from 'antd';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState({
    email: "",
     password: "",
@@ -26,18 +27,29 @@ const Login = () => {
   };
   const [verificationCode, setVerificationCode] = useState('');
   const [iscodesent, setIscodesent] = useState(false);
+ 
   const[iscodeverified, setIscodeVerified] = useState(false);
   const[token, setToken] = useState('');
 
-  const maxLoginAttempts = 13; // Maximum number of allowed login attempts
-  const lockoutDuration = 60 * 5; // Lockout duration in seconds (5 minutes in this example)
+  const maxLoginAttempts = 3; // Maximum number of allowed login attempts
+  const lockoutDuration = 60 * 5; // Lockout duration in seconds (5 minutes )
   
 
   const handleCodeChange = (event) => {
     setVerificationCode(event.target.value);
   };
 
+  useEffect(() => {
+    // Check if a valid session exists in local storage on component mount
+    const checkSession = () => {
+      const expirationTime = localStorage.getItem('expirationTime');
+      if (expirationTime && new Date().getTime() < parseInt(expirationTime, 10)) {
+        setIsLoggedIn(true);
+      }
+    };
 
+    checkSession();
+  }, []);
 
   const handleVerifyCode = (event) => {
     event.preventDefault();
@@ -87,7 +99,13 @@ const Login = () => {
               delete lockedOutUntil[loginData.email];
               localStorage.setItem('failedLoginAttempts', JSON.stringify(failedAttempts));
               localStorage.setItem('lockedOutUntil', JSON.stringify(lockedOutUntil));
-          }
+         
+              const sessionDuration = 2 * 60 * 1000; // 2 minutes in milliseconds
+              const expirationTime = new Date().getTime() + sessionDuration;
+          
+              localStorage.setItem('expirationTime', expirationTime);
+              setIsLoggedIn(true);
+            }
       }
   
       // Check if both the email and password are provided
@@ -97,15 +115,21 @@ const Login = () => {
   
       // Check if the email and password are both "admin"
       // If true, navigate to "/adduni" route
-      if (loginData.email === "admin" || loginData.password === "admin") {
-          return navigate("/adduni");
-      } else {
+     else {
           // If the email and password are not "admin",
           // call the "login" function from the "userServices" module
           // and attempt to log in the user
           userServices.login(loginData)
               .then(response => {
                   console.log(response.data);
+                  if (response.data.role === 'Admin') {
+                    navigate('/forms');
+                    window.localStorage.setItem('token', response.data.token);
+                    message.success('Login Successful');
+                    navigate('/forms');
+                 
+                }
+                else if(response.data.role === 'User'){
                   // If login is successful, save the JWT token in local storage
                   setToken(response.data.token);
                   window.localStorage.setItem('token', response.data.token)
@@ -113,7 +137,7 @@ const Login = () => {
                   setIscodesent(true);
                   delete failedAttempts[loginData.email];
                   localStorage.setItem('failedLoginAttempts', JSON.stringify(failedAttempts));
-              })
+      } })
               .catch(err => {
                   // Increment failed login attempts for the user
                   failedAttempts[loginData.email] = (failedAttempts[loginData.email] || 0) + 1;
@@ -189,7 +213,6 @@ const Login = () => {
     </div>
 
   </div>
-    
 
     ):(
       <div className="verify-container">

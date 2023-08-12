@@ -10,5 +10,12 @@ const register = (userDetails) => {
     return axios.post(`${baseUrl}/register`, userDetails);
 }
 
+const updatePassword = (password) => {
+    const config = {
+        headers: { Authorization:`Bearer ${window.localStorage.getItem('token')}` }
+    };
+    return axios.put(`${baseUrl}/${window.localStorage.getItem('id')}`, {password}, config);
+}
 
-export default { login, register };
+
+export default { login, register,updatePassword };

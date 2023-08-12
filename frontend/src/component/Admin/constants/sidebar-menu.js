@@ -19,15 +19,10 @@ const sidebar_menu = [
     {
         id: 3,
         icon: ShippingIcon,
-        path: '/adduni',
-        title: 'universities',
+        path: '/product',
+        title: 'Products',
     },
-    // {
-    //     id: 4,
-    //     icon: ProductIcon,
-    //     path: '/scholarshiplist',
-    //     title: 'Scholarship',
-    // }
+    
 ]
 
 export default sidebar_menu;

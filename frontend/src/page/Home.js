@@ -101,7 +101,7 @@ const Home = ({ product, setProducts }) => {
 
       <div className="">
         <div className="flex w-full items-center">
-          <h2 className="font-bold text-2xl text-slate-800 mb-4">Bangles</h2>
+          <h2 className="font-bold text-2xl text-slate-800 mb-4">Necklaces</h2>
           <div className="ml-auto flex gap-4">
             <button
               onClick={preveProduct}

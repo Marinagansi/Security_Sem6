@@ -11,15 +11,15 @@ const productSchema=mongoose.Schema({
     },
     size:{
         type:String,
-        required:true,
+        
     },
     material:{
         type:String,
-        required:true,
+       
     },
     quantity:{
         type:String,
-        required:true,
+       
     },
     types:{
         type:String,

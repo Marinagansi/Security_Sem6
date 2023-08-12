@@ -7,6 +7,8 @@ const user_controller=require('../controller/user_controller')
 const uploadOptions = require('../middleware/uploaduser')
 const { verifyUser , VerifyAdmin}=require('../middleware/auth')
 
+
+router.route("/").get(user_controller.getAlltUser);
 router.route('/register')
 .post(uploadOptions.single('image'),user_controller.register)
 
@@ -16,6 +18,9 @@ router.route('/')
 // for login user
 router.route('/login')
 .post(user_controller.login)
+
+router.route('/:id')
+ .put(verifyUser,user_controller.updateUser)
 
 
 router.get('/profile', verifyUser, async (req, res) =>{
